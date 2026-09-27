@@ -1,5 +1,4 @@
 param(
-  [switch]$Install,
   [switch]$Uninstall,
   [switch]$Verify,
   [int]$Port = 9333,
@@ -7,8 +6,8 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $Name = 'Cleanse for Blitz'
-$Version = '1.0.0'
-$UpdateUrl = 'https://raw.githubusercontent.com/rojnwa/cleanse-for-blitz/HEAD/cleanse.ps1'
+$Version = '0.1.0'
+$UpdateUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/cleanse.ps1'
 $shell = New-Object -ComObject WScript.Shell
 trap { [void]$shell.Popup($_.Exception.Message, 0, $Name, 16); break }
 
@@ -57,11 +56,10 @@ if ($Uninstall) {
 
 if (-not (Test-Path $BlitzExe)) { throw "Blitz isn't installed. Get it from blitz.gg, then try again." }
 
-if ($Install -or -not $PSCommandPath) {
-  $source = if ($PSCommandPath) { [IO.File]::ReadAllText($PSCommandPath) } else { Invoke-RestMethod $UpdateUrl -UseBasicParsing }
+if (-not $PSCommandPath) {
   $script = "$InstallDir\cleanse.ps1"
   $null = New-Item $InstallDir -ItemType Directory -Force
-  [IO.File]::WriteAllText($script, $source)
+  [IO.File]::WriteAllText($script, (Invoke-RestMethod $UpdateUrl -UseBasicParsing))
 
   Remove-Item $Shortcuts -ErrorAction SilentlyContinue
   $targets = $Shortcuts[0, 1]
@@ -130,7 +128,7 @@ if ($Verify) {
   $result = (Receive | ConvertFrom-Json).result.result.value
   $result | Format-List | Out-Host
   $pass = $result.adsVisible -eq 0 -and $result.railWidth -eq '0px' -and -not $result.cookieBanner -and $result.adHostBlocked
-  Write-Host $(if ($pass) { 'PASS' } else { 'FAIL' })
+  if ($pass) { 'PASS' } else { 'FAIL' }
   exit [int](-not $pass)
 }
 
