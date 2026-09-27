@@ -8,6 +8,7 @@ $ErrorActionPreference = 'Stop'
 $Name = 'Cleanse for Blitz'
 $Version = '0.1.1'
 $UpdateUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/cleanse.ps1'
+$IconUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/icon.ico'
 $shell = New-Object -ComObject WScript.Shell
 trap { [void]$shell.Popup($_.Exception.Message, 0, $Name, 16); break }
 
@@ -47,6 +48,7 @@ $PageScript = @'
 
 $InstallDir = "$env:LOCALAPPDATA\$Name"
 $script = "$InstallDir\cleanse.ps1"
+$icon = "$InstallDir\icon.ico"
 $Shortcuts = 'Desktop', 'Programs', 'Startup' | ForEach-Object { Join-Path ([Environment]::GetFolderPath($_)) "$Name.lnk" }
 
 if ($Uninstall) {
@@ -61,6 +63,7 @@ if (-not $Verify -and $PSCommandPath -ne $script) {
   $source = if ($PSCommandPath) { [IO.File]::ReadAllText($PSCommandPath) } else { Invoke-RestMethod $UpdateUrl -UseBasicParsing }
   $null = New-Item $InstallDir -ItemType Directory -Force
   [IO.File]::WriteAllText($script, $source)
+  try { Invoke-WebRequest $IconUrl -OutFile $icon -UseBasicParsing -TimeoutSec 10 } catch {}
 
   Remove-Item $Shortcuts -ErrorAction SilentlyContinue
   $targets = $Shortcuts[0, 1]
@@ -69,7 +72,7 @@ if (-not $Verify -and $PSCommandPath -ne $script) {
     $lnk = $shell.CreateShortcut($path)
     $lnk.TargetPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
     $lnk.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$script`""
-    $lnk.IconLocation = "$BlitzExe,0"
+    $lnk.IconLocation = if (Test-Path $icon) { "$icon,0" } else { "$BlitzExe,0" }
     $lnk.WindowStyle = 7
     $lnk.Save()
   }

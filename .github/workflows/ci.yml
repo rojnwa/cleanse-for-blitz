@@ -28,4 +28,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           grep -qx "\$Version = '${GITHUB_REF_NAME#v}'" cleanse.ps1 || { echo "::error::\$Version in cleanse.ps1 doesn't match $GITHUB_REF_NAME"; exit 1; }
-          gh release create "$GITHUB_REF_NAME" cleanse.ps1 --generate-notes --verify-tag
+          gh release create "$GITHUB_REF_NAME" cleanse.ps1 assets/icon.ico --generate-notes --verify-tag
