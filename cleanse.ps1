@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $Name = 'Cleanse for Blitz'
-$Version = '0.1.1'
+$Version = '0.2.0'
 $UpdateUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/cleanse.ps1'
 $IconUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/icon.ico'
 $shell = New-Object -ComObject WScript.Shell
