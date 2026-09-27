@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="880" height="280" role="img" aria-labelledby="title desc">
+  <title id="title">Cleanse</title>
+  <desc id="desc">Adblock for the Blitz desktop app. No ads, no trackers, no cookie banner.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1d25"/>
+      <stop offset="1" stop-color="#060e13"/>
+    </linearGradient>
+    <radialGradient id="aura">
+      <stop offset="0" stop-color="#5eead4" stop-opacity=".5"/>
+      <stop offset=".45" stop-color="#22d3ee" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="haze">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset=".2" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#5eead4"/>
+    </linearGradient>
+    <linearGradient id="shine" gradientTransform="rotate(20)">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ccfbf1"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <clipPath id="card"><rect width="880" height="280" rx="28"/></clipPath>
+    <clipPath id="icon"><rect x="-52" y="-52" width="104" height="104" rx="18"/></clipPath>
+    <clipPath id="word"><text x="330" y="134" font-size="80" font-weight="800" letter-spacing="-2">Cleanse</text></clipPath>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <path id="spark" d="M0-7 1.6-1.6 7 0 1.6 1.6 0 7-1.6 1.6-7 0-1.6-1.6Z" fill="#ccfbf1"/>
+  </defs>
+  <style>
+    .aura, .ring, .spark { transform-box: fill-box; transform-origin: center }
+    .aura { animation: pulse 3s ease-in-out infinite }
+    .ring { fill: none; stroke: #5eead4; stroke-width: 2; opacity: 0; animation: cast 3s cubic-bezier(.2, .6, .3, 1) infinite }
+    .spark { opacity: 0; animation: rise 3.6s ease-out infinite }
+    .shine { animation: sweep 5s ease-in-out infinite }
+    @keyframes pulse { 0%, 100% { transform: scale(.9); opacity: .7 } 50% { transform: scale(1.08); opacity: 1 } }
+    @keyframes cast { 0% { transform: scale(.8); opacity: .8 } 100% { transform: scale(1.9); opacity: 0 } }
+    @keyframes rise { 0% { transform: translateY(0) scale(.3); opacity: 0 } 25% { opacity: 1 } 100% { transform: translateY(-64px) scale(1); opacity: 0 } }
+    @keyframes sweep { 0%, 50% { transform: none } 100% { transform: translateX(640px) } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important } }
+  </style>
+
+  <g clip-path="url(#card)">
+    <rect width="880" height="280" fill="url(#bg)"/>
+    <circle cx="760" cy="30" r="260" fill="url(#haze)"/>
+    <g transform="translate(210 140)">
+      <circle class="aura" r="130" fill="url(#aura)"/>
+      <circle class="ring" r="60"/>
+      <circle class="ring" r="60" style="animation-delay: 1s"/>
+      <circle class="ring" r="60" style="animation-delay: 2s"/>
+      <g transform="translate(-44 -24)"><use class="spark" href="#spark"/></g>
+      <g transform="translate(38 -46)"><use class="spark" href="#spark" style="animation-delay: .6s"/></g>
+      <g transform="translate(58 8)"><use class="spark" href="#spark" style="animation-delay: 1.2s"/></g>
+      <g transform="translate(-60 22)"><use class="spark" href="#spark" style="animation-delay: 1.8s"/></g>
+      <g transform="translate(6 -62)"><use class="spark" href="#spark" style="animation-delay: 2.4s"/></g>
+      <g transform="translate(-24 50)"><use class="spark" href="#spark" style="animation-delay: 3s"/></g>
+      <rect x="-58" y="-58" width="116" height="116" rx="24" fill="#2dd4bf" opacity=".45" filter="url(#blur)"/>
+      <image href="data:image/png;base64,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" x="-52" y="-52" width="104" height="104" clip-path="url(#icon)"/>
+      <rect x="-52" y="-52" width="104" height="104" rx="18" fill="none" stroke="url(#frame)" stroke-width="3"/>
+      <g transform="translate(46 46)" font-family="'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif">
+        <rect x="-14" y="-14" width="28" height="28" rx="8" fill="#0b1d25" stroke="#99f6e4" stroke-width="1.5"/>
+        <text y="5.5" text-anchor="middle" font-size="15" font-weight="700" fill="#ccfbf1">D</text>
+      </g>
+    </g>
+
+    <g font-family="'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif">
+      <text x="330" y="134" font-size="80" font-weight="800" letter-spacing="-2" fill="url(#ink)">Cleanse</text>
+      <g clip-path="url(#word)"><rect class="shine" x="130" y="50" width="140" height="100" fill="url(#shine)"/></g>
+      <text x="333" y="176" font-size="24" fill="#9fb8c2">Adblock for the Blitz desktop app</text>
+      <g font-size="15" font-weight="600" fill="#ccfbf1">
+        <rect x="333" y="198" width="84" height="32" rx="16" fill="#5eead4" fill-opacity=".1" stroke="#5eead4" stroke-opacity=".4"/>
+        <text x="375" y="219" text-anchor="middle">No ads</text>
+        <rect x="427" y="198" width="118" height="32" rx="16" fill="#5eead4" fill-opacity=".1" stroke="#5eead4" stroke-opacity=".4"/>
+        <text x="486" y="219" text-anchor="middle">No trackers</text>
+        <rect x="555" y="198" width="160" height="32" rx="16" fill="#5eead4" fill-opacity=".1" stroke="#5eead4" stroke-opacity=".4"/>
+        <text x="635" y="219" text-anchor="middle">No cookie banner</text>
+      </g>
+    </g>
+  </g>
+  <rect x="1" y="1" width="878" height="278" rx="27" fill="none" stroke="#5eead4" stroke-opacity=".22" stroke-width="2"/>
+</svg>
