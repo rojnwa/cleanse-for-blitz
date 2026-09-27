@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $Name = 'Cleanse for Blitz'
-$Version = '0.1.0'
+$Version = '0.1.1'
 $UpdateUrl = 'https://github.com/rojnwa/cleanse-for-blitz/releases/latest/download/cleanse.ps1'
 $shell = New-Object -ComObject WScript.Shell
 trap { [void]$shell.Popup($_.Exception.Message, 0, $Name, 16); break }
