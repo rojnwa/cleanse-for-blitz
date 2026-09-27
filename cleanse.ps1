@@ -46,6 +46,7 @@ $PageScript = @'
 '@
 
 $InstallDir = "$env:LOCALAPPDATA\$Name"
+$script = "$InstallDir\cleanse.ps1"
 $Shortcuts = 'Desktop', 'Programs', 'Startup' | ForEach-Object { Join-Path ([Environment]::GetFolderPath($_)) "$Name.lnk" }
 
 if ($Uninstall) {
@@ -56,10 +57,10 @@ if ($Uninstall) {
 
 if (-not (Test-Path $BlitzExe)) { throw "Blitz isn't installed. Get it from blitz.gg, then try again." }
 
-if (-not $PSCommandPath) {
-  $script = "$InstallDir\cleanse.ps1"
+if (-not $Verify -and $PSCommandPath -ne $script) {
+  $source = if ($PSCommandPath) { [IO.File]::ReadAllText($PSCommandPath) } else { Invoke-RestMethod $UpdateUrl -UseBasicParsing }
   $null = New-Item $InstallDir -ItemType Directory -Force
-  [IO.File]::WriteAllText($script, (Invoke-RestMethod $UpdateUrl -UseBasicParsing))
+  [IO.File]::WriteAllText($script, $source)
 
   Remove-Item $Shortcuts -ErrorAction SilentlyContinue
   $targets = $Shortcuts[0, 1]
