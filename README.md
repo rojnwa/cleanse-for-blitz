@@ -45,8 +45,8 @@ ads can be blocked.
 **Blitz opens twice at login.** Turn off Blitz's own "launch on startup" setting and let Cleanse start
 it instead (paste the install line again to change that choice).
 
-**Does it work with Blitz for Fortnite, CS2 or Marvel Rivals?** No. Those are separate Blitz apps.
-Cleanse works with the main Blitz app (League of Legends, TFT and VALORANT).
+**Does it work with Blitz for Fortnite, CS2 or Marvel Rivals?** Not tested yet. Cleanse currently
+starts the main Blitz app, which it's tested with for League of Legends, TFT and VALORANT.
 
 **Ads are back after a Blitz update.** Blitz probably changed its ad provider. Cleanse updates itself
 every time you open Blitz with it, so a fix arrives on its own once it's released.
