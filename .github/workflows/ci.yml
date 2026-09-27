@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - shell: pwsh
+        run: |
+          Install-PSResource PSScriptAnalyzer -TrustRepository -Quiet
+          Invoke-ScriptAnalyzer -Path cleanse.ps1 -Severity Warning, Error -ExcludeRule PSAvoidUsingEmptyCatchBlock -EnableExit
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          grep -qx "\$Version = '${GITHUB_REF_NAME#v}'" cleanse.ps1 || { echo "::error::\$Version in cleanse.ps1 doesn't match $GITHUB_REF_NAME"; exit 1; }
+          gh release create "$GITHUB_REF_NAME" cleanse.ps1 --generate-notes --verify-tag
